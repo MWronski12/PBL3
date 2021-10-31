@@ -62,24 +62,18 @@ def rx_interrupt_handler(gpio):
 #        logger.debug("Interrupt detected during idle phase\nSync phase initialized\ntimeout set to: {}".format(timeout))
 
     elif state == SYNC:
-        if time.time() < timeout - tol:
-#            logger.debug("Next interrupt detected too early, probably noise")
-            return
-        if time.time() > timeout + tol:
+        if time.time() < timeout - tol or time.time() > timeout + tol:
             state = IDLE
 #            logger.debug("Sync phase timeout; returning to idle...")
             return
-        rx_tick = (time.time() - timestamp) / 32
+        rx_tick = (time.time() - timestamp) / 31
         timeout = time.time() + 4 * rx_tick
         state = TRANSMISSION
         rx_receive()
 #        logger.debug("Interrupt detected during Sync phase\nrx_tick set to: {}\ntimeout set to: {}\nTransmission phase initialized".format(rx_tick, timeout))
 
     elif state == TRANSMISSION:
-        if time.time() < timeout - tol:
-#            logger.debug("Interrupt detected too early, probably noise")
-            return
-        if time.time() > timeout + tol:
+        if time.time() < timeout - tol or time.time() > timeout + tol:
             buff = ""
             bits_left = 8
             state = IDLE
