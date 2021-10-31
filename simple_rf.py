@@ -27,14 +27,14 @@ timeout = 0
 timestamp = 0
 state = IDLE
 
-rx_tick = 1 / 2000
-tx_tick = 1 / 2000
+rx_tick = 350 / 1000000
+tx_tick = 350 / 1000000
 
 msg_len = 8
 bits_left = 8
 buff = ""
 
-tol = 2/100000
+tol = rx_tick * 0.8
 tx_pin = 17
 rx_pin = 27
 
