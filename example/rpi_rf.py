@@ -41,7 +41,7 @@ class RFDevice:
         self._rx_repeat_count = 0
         # successful RX values
         self.rx_msg = None
-        self.rx_msg_timestamp = None
+        self.rx_timestamp = None
         self.rx_bitlength = None
         self.rx_pulselength = None
 
@@ -180,7 +180,7 @@ class RFDevice:
 
         if self._rx_change_count > 6:
             self.rx_msg = bits
-            self.rx_msg_timestamp = timestamp
+            self.rx_timestamp = timestamp
             self.rx_bitlength = int(change_count / 2)
             self.rx_pulselength = delay
             return True

@@ -33,7 +33,7 @@ timestamp = None
 logging.info("Listening for messagess on GPIO " + str(args.gpio))
 
 while True:
-    if rfdevice.rx_code_timestamp != timestamp:
-        timestamp = rfdevice.rx_code_timestamp
+    if rfdevice.rx_msg_timestamp != timestamp:
+        timestamp = rfdevice.rx_msg_timestamp
         logging.info("Message received: " + str(rfdevice.rx_code))
     time.sleep(0.01)
